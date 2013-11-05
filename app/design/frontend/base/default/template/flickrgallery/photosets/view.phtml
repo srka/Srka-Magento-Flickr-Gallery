@@ -1,0 +1,39 @@
+<?php
+/**
+ * Photosets view template
+ *
+ * @see Srka_Flickrgallery_Block_Photosets
+ */
+?>
+<?php $_photosets = $this->getPhotosets(); ?>
+<?php if(!empty($_photosets)): ?>
+
+    <?php $_toolbar = $this->getChild('flickrgalleryToolbar')->setData('data', $this->getToolbarData())->toHtml(); ?>
+    <?php echo $_toolbar; ?>
+	
+	<div class="photoset-thumb-wrapper">
+		<?php $_tmp_count = 0; ?>
+		<?php foreach($_photosets as $_photoset):?>
+		<?php $_tmp_count++; ?>
+		<div id="thumbnail_<?php echo $this->getPhotosetId($_photoset) ?>" class="thumbnail<?php ($_tmp_count%2) ? $_tmp_class = 'odd' : $_tmp_class = 'even'; echo " $_tmp_class"; ?>">
+        	<div class="thumbnail_bkg">
+				<table>
+					<tr>
+						<td class="img"><a href="<?php echo $this->getPhotosetUrl($_photoset); ?>"><div class="img_wrapper gray-box-5"><img src="<?php echo $this->getPhotosetImageUrl($_photoset); ?>" /></div></a></td>
+						<td class="info">
+							<h4><a href="<?php echo $this->getPhotosetUrl($_photoset); ?>"><?php echo $this->getPhotosetTitle($_photoset) ?></a></h4>
+							<p class="description"><?php echo $this->getPhotosetDescription($_photoset) ?></p>
+						</td>
+					</tr>
+				</table>
+            </div>
+		</div>
+		<?php endforeach; ?>
+	</div>
+	<div class="f-clear"></div>
+	
+	<div class="toolbar-bottom"><?php echo $_toolbar; ?></div>
+
+<?php else: ?>
+	<p class="note-msg"><?php echo Mage::helper('flickrgallery')->__('There are no photosets in the gallery.') ?></p>
+<?php endif; ?>

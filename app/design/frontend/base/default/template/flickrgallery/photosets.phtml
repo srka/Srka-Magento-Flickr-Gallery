@@ -1,0 +1,26 @@
+<?php
+/**
+ * Photosets template
+ *
+ * @see Srka_Flickrgallery_Block_Photosets
+ */
+?>
+<?php $_id_postfix = $this->getIdPostfix(); ?>
+<div class="flickrgallery">
+	<div class="page-title">
+		<h1><?php echo Mage::helper('flickrgallery')->__('Photosets'); ?></h1>
+	</div>
+
+    <div id="flickrgalley_ajax_<?php echo $_id_postfix ?>" class="flickrgalley_ajax">
+        <div id="loading-mask-<?php echo $_id_postfix ?>" class="loading-mask">
+            <img src="<?php echo $this->getSkinUrl('flickrgallery/images/loading.gif') ?>" alt="<?php echo Mage::helper('flickrgallery')->__('Loading...') ?>"/>
+            <?php echo Mage::helper('flickrgallery')->__('Please wait...') ?>
+        </div>
+	</div>
+
+	<script type="text/javascript">
+	//<![CDATA[
+        var FlickrGallery<?php echo $_id_postfix ?> = new Flickrgallery('photosets', '<?php echo $this->getPhotosetsRenderUrl() ?>', 'flickrgalley_ajax_<?php echo $_id_postfix ?>');
+	//]]>
+	</script>
+</div>

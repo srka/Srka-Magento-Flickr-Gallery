@@ -1,0 +1,44 @@
+<?php
+/**
+ * Carousel view template
+ *
+ * @see Srka_Flickrgallery_Block_Photoset
+ */
+?>
+<?php
+	$_photosets = $this->getCarouselPhotosets();
+	$_hasTooltip = $this->carouselHasTooltip();
+?>
+<?php if(count($_photosets)): ?>
+
+	<style type="text/css">
+		@import url("<?php echo $this->getSkinUrl('flickrgallery/css/carousel.css') ?>");
+		<?php if($_hasTooltip): ?>
+			@import url("<?php echo $this->getSkinUrl('flickrgallery/enyo-opentip/opentip.css') ?>");
+			@import url("<?php echo $this->getSkinUrl('flickrgallery/css/tooltips.css') ?>");
+		<?php endif; ?>
+		#flickrgallery-carousel-wrapper { width:<?php echo (intval($this->getCarouselVisibleCount()) * 90); ?>px; }
+		#flickrgallery-carousel-content { width:<?php echo count($_photosets) * 90; ?>px; }
+	</style>
+
+	<div id="flickrgallery-carousel" class="block">
+		<div class="block-title">
+			<strong><span><a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>gallery/"><?php echo Mage::helper('flickrgallery')->__('Gallery') ?></a></span></strong>
+		</div>
+		<div class="block-content">
+			<div id="flickrgallery-carousel-bkg">
+				<a href="javascript:void(0)" class="carousel-control next" rel="next"></a>
+				<a href="javascript:void(0)" class="carousel-control prev" rel="prev"></a>
+				<div id="flickrgallery-carousel-wrapper">
+					<div id="flickrgallery-carousel-content">
+						<?php foreach($_photosets as $_photoset): ?>
+							<a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>gallery/set/id/<?php echo $_photoset['id'] ?>" class="<?php if($_hasTooltip) echo 'opentip' ?>" title="<?php echo $_photoset['title'] ?>" id="<?php echo 'set-' . $_photoset['id'] ?>">
+								<img src="http://farm<?php echo $_photoset['farm'] ?>.static.flickr.com/<?php echo $_photoset['server'] ?>/<?php echo $_photoset['cover'] ?>_<?php echo $_photoset['secret'] ?>_s.jpg" alt="<?php echo $_photosets['title'] ?>" />
+							</a>
+						<?php endforeach; ?>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

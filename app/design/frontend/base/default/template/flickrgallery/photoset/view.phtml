@@ -1,0 +1,62 @@
+<?php
+/**
+ * Photoset view template
+ *
+ * @see Srka_Flickrgallery_Block_Photoset
+ */
+?>
+<?php $this->initRenderPhotoset(); ?>
+<?php
+    $_photos = $this->getPhotos();
+    $_hasTooltip = $this->hasTooltip();
+    $_isCustom = $this->isCustom();
+    $_id_postfix = $this->getIdPostfix();
+?>
+<?php if( ($this->canDisplay($this->getPhotosetId()) || $this->isCustom()) && !empty($_photos)): ?>
+    <div class="page-title">
+        <h1><?php echo $this->getPhotosetTitle(); ?></h1>
+        <?php if(!$_isCustom): ?>
+        <script type="text/javascript">
+            //<![CDATA[
+            FlickrGallery<?php echo $_id_postfix ?>.addPhotosetCrumb('<?php echo $this->getPhotosetTitle(); ?>');
+            //]]>
+        </script>
+        <?php endif; ?>
+    </div>
+	
+	<p class="description"><?php echo $this->getPhotosetDescription(); ?></p>
+
+    <?php $_toolbar = $this->getChild('flickrgalleryToolbar')->setData('data', $this->getToolbarData())->toHtml(); ?>
+    <?php echo $_toolbar; ?>
+    
+    <div class="photo-thumb-wrapper">
+        <div class="loading-mask-wrapper custom">
+            <div class="loading-mask">
+                <img src="<?php echo $this->getSkinUrl('flickrgallery/images/loading.gif') ?>" alt="<?php echo Mage::helper('flickrgallery')->__('Loading...') ?>"/>
+                <?php echo Mage::helper('flickrgallery')->__('Please wait...') ?>
+            </div>
+        </div>
+
+		<?php $tmp_count = 0; ?>
+        <?php foreach($_photos as $_photo):?>
+        <?php $tmp_count++; ?>
+        <div id="photo_thumb_<?php echo $this->getPhotoId($_photo) ?>" class="photo_thumb<?php if($_hasTooltip) echo ' opentip' ?>" title="<?php echo $this->getPhotoTitle($_photo) ?>">
+    		<?php if($this->showOriginal()): ?>
+            <a title="<?php echo $this->getPhotoTitle($_photo) ?>" rel="<?php echo $this->getPhotoRel() ?>" href="<?php echo $this->getOriginalSizeUrl($_photo) ?>" <?php echo $this->getPhotoTarget() ?> class="<?php echo $this->getPhotoClass() ?>">
+            <?php else: ?>
+            <a title="<?php echo $this->getPhotoTitle($_photo) ?>" rel="<?php echo $this->getPhotoRel() ?>" href="<?php echo $this->getFullSizeUrl($_photo) ?>" <?php echo $this->getPhotoTarget() ?> class="<?php echo $this->getPhotoClass() ?>">
+            <?php endif; ?>
+                <div class="img_wrapper">
+                    <img <?php if($_hasTooltip): ?>title=" "<?php else: ?>title="<?php echo $this->getPhotoTitle($_photo) ?>"<?php endif; ?> alt="<?php echo $this->getPhotoTitle($_photo) ?>" src="<?php echo $this->getThumbSizeUrl($_photo) ?>" />
+                </div>
+            </a>
+        </div>
+        <?php endforeach; ?>
+        <div class="f-clear"></div>
+    </div>
+
+    <div class="toolbar-bottom"><?php echo $_toolbar; ?></div>
+
+<?php else: ?>
+	<p class="note-msg"><?php echo Mage::helper('flickrgallery')->__('There are no photos in this photoset.') ?></p>
+<?php endif; ?>

@@ -1,0 +1,41 @@
+<?php
+/**
+ * Photoset template
+ *
+ * @see Srka_Flickrgallery_Block_Photoset
+ */
+?>
+<?php $_id_postfix = $this->generateIdPostfix(); ?>
+<div id="flickrgallery<?php echo $_id_postfix ?>" class="flickrgallery">
+
+    <div id="flickrgalley_ajax<?php echo $_id_postfix ?>" class="flickrgalley_ajax">
+        <div id="loading-mask<?php echo $_id_postfix ?>" class="loading-mask">
+            <img src="<?php echo $this->getSkinUrl('flickrgallery/images/loading.gif') ?>" alt="<?php echo Mage::helper('flickrgallery')->__('Loading...') ?>"/>
+            <?php echo Mage::helper('flickrgallery')->__('Please wait...') ?>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        //<![CDATA[
+            <?php if($this->isCustom()): ?>
+            var FlickrGallery<?php echo $_id_postfix ?> = new Flickrgallery(
+                'photoset',
+                '<?php echo $this->getPhotosetRenderUrl() ?>',
+                'flickrgalley_ajax<?php echo $_id_postfix ?>',
+                '<?php echo $this->hasTooltip() ?>',
+                '<?php echo $this->getTooltipStyle() ?>',
+                '<?php echo $_id_postfix ?>',
+                <?php echo $this->getPerPage() ?>,
+                '<?php echo $this->getThumbSizePrefix() ?>');
+            <?php else: ?>
+            var FlickrGallery<?php echo $_id_postfix ?> = new Flickrgallery(
+                'photoset',
+                '<?php echo $this->getPhotosetRenderUrl() ?>',
+                'flickrgalley_ajax<?php echo $_id_postfix ?>',
+                '<?php echo $this->hasTooltip() ?>',
+                '<?php echo $this->getTooltipStyle() ?>',
+                '<?php echo $_id_postfix ?>');
+            <?php endif; ?>
+        //]]>
+    </script>
+</div>

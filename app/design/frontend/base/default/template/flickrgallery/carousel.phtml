@@ -1,0 +1,21 @@
+<?php
+/**
+ * Carousel template
+ *
+ * @see Srka_Flickrgallery_Block_Photoset
+ */
+?>
+<?php $_hasTooltip = $this->carouselHasTooltip(); ?>
+
+<div id="flickrgallery_carousel_ajax"></div>
+
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('flickrgallery/js/script.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('flickrgallery/js/carousel.js') ?>"></script>
+<?php if($_hasTooltip): ?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('flickrgallery/enyo-opentip/opentip.js') ?>"></script>
+<?php endif; ?>
+<script type="text/javascript">
+//<![CDATA[
+    var FlickrGalleryCarousel = new FlickrgalleryCarousel('<?php echo $this->getCarouselUrl() ?>', 'flickrgallery_carousel_ajax', '<?php echo $_hasTooltip ?>', '<?php echo $this->carouselGetTooltipStyle(); ?>', { <?php echo $this->getCarouselOptions(); ?> });
+//]]>
+</script>

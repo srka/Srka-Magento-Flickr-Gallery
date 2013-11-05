@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+    <default>
+        <reference name="footer_links">
+            <action method="addLink" translate="label title">
+                <label>Gallery</label>
+                <url>gallery</url>
+                <title>Gallery</title>
+                <prepare>true</prepare>
+                <urlParams helper="core/url/getHomeUrl"/>
+                <position>100</position>
+                <liParams/>
+                <aParams>class="top-link-gallery"</aParams>
+            </action>
+        </reference>
+    </default>
+
+    <flickrgallery>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="head">
+            <action method="addCss"><stylesheet>flickrgallery/css/styles.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>flickrgallery/js/script.js</name></action>
+        </reference>
+    </flickrgallery>
+
+    <flickrgallery_photosets>
+        <reference name="breadcrumbs">
+            <action method="addCrumb"><crumbName>Home</crumbName><crumbInfo><label>Home</label><title>Home</title><link>/</link></crumbInfo></action>
+            <action method="addCrumb"><crumbName>Gallery</crumbName><crumbInfo><label>Gallery</label><title>Gallery</title></crumbInfo></action>
+        </reference>
+
+        <reference name="content">
+            <block type="flickrgallery/photosets" name="photosets" template="flickrgallery/photosets.phtml">
+                <block type="flickrgallery/photosets" name="photosets_view" as="photosetsView" template="flickrgallery/photosets/view.phtml">
+                    <block type="flickrgallery/toolbar" name="flickrgallery_toolbar" as="flickrgalleryToolbar" template="flickrgallery/toolbar.phtml">
+                        <block type="flickrgallery/toolbar" name="flickrgallery_pager" as="flickrgalleryPager" template="flickrgallery/toolbar/pager.phtml"/>
+                    </block>
+                </block>
+            </block>
+        </reference>
+    </flickrgallery_photosets>
+
+    <flickrgallery_photoset>
+        <reference name="breadcrumbs">
+            <action method="unsetChildren"></action>
+            <action method="addCrumb"><crumbName>Home</crumbName><crumbInfo><label>Home</label><title>Home</title><link>/</link></crumbInfo></action>
+            <action method="addCrumb"><crumbName>Gallery</crumbName><crumbInfo><label>Gallery</label><title>Gallery</title><link>/gallery/</link></crumbInfo></action>
+        </reference>
+
+        <reference name="content">
+            <block type="flickrgallery/photoset" name="photoset" template="flickrgallery/photoset.phtml">
+                <block type="flickrgallery/photoset" name="photoset_view" as="photosetView" template="flickrgallery/photoset/view.phtml">
+                    <block type="flickrgallery/toolbar" name="flickrgallery_toolbar" as="flickrgalleryToolbar" template="flickrgallery/toolbar.phtml">
+                        <block type="flickrgallery/toolbar" name="flickrgallery_pager" as="flickrgalleryPager" template="flickrgallery/toolbar/pager.phtml"/>
+                    </block>
+                </block>
+            </block>
+        </reference>
+    </flickrgallery_photoset>
+
+    <flickrgallery_index_rendercustomset>
+        <block type="flickrgallery/photoset" name="photoset_custom_view" as="photosetCustomView" template="flickrgallery/photoset/view.phtml">
+            <action method="isCustom"><is_custom>1</is_custom></action>
+            <block type="flickrgallery/toolbar" name="flickrgallery_toolbar" as="flickrgalleryToolbar" template="flickrgallery/toolbar.phtml">
+                <block type="flickrgallery/toolbar" name="flickrgallery_pager" as="flickrgalleryPager" template="flickrgallery/toolbar/pager_ajax.phtml" />
+            </block>
+        </block>
+    </flickrgallery_index_rendercustomset>
+
+    <flickrgallery_lightbox>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>flickrgallery/lightbox/js/lightbox.js</name></action>
+            <action method="addCss"><stylesheet>flickrgallery/lightbox/css/lightbox.css</stylesheet></action>
+        </reference>
+    </flickrgallery_lightbox>
+
+    <flickrgallery_tooltips>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>flickrgallery/enyo-opentip/opentip.js</name></action>
+            <action method="addCss"><stylesheet>flickrgallery/enyo-opentip/opentip.css</stylesheet></action>
+            <action method="addCss"><stylesheet>flickrgallery/css/tooltips.css</stylesheet></action>
+        </reference>
+    </flickrgallery_tooltips>
+</layout>

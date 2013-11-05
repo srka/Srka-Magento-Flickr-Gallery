@@ -1,0 +1,50 @@
+<?php
+/**
+ * Pager template
+ *
+ * @see Srka_Flickrgallery_Block_Toolbar
+ */
+?>
+<?php
+    $this->setToolbarData($this->data);
+    $_page_number = $this->getToolbarPageNumber();
+    $_pages = $this->getToolbarPages();
+?>
+<div class="pager">
+	<?php if($_pages > 1): ?>
+		<p class="amount"><?php echo $this->__('Items %s to %s of %s', $this->getToolbarItemsFrom(), $this->getToolbarItemsTo(), $this->getToolbarTotal()) ?></p>
+	<?php else: ?>
+		<p class="amount"><strong><?php echo $this->__('%s Item(s)', $this->getToolbarTotal()) ?></strong></p>
+	<?php endif; ?>
+	
+	<?php if($_pages > 1): ?>
+		<ol class="pages">
+			<?php // Previous // ?>
+			<?php if($_page_number > 1): ?>
+				<li class="first">
+                    <a title="Previous" href="<?php echo $this->getToolbarUrl('prev') ?>" class="previous i-previous">
+                        <img class="v-middle" alt="Previous" src="<?php echo $this->getSkinUrl('images/pager_arrow_left.gif'); ?>" />
+                    </a>
+				</li>
+			<?php endif; ?>
+						
+			<?php // Pages // ?>	
+			<?php for($i = 1; $i <= $_pages; $i++): ?>
+				<?php if($i == $_page_number): ?>
+					<li class="current<?php if($i == 1) echo ' first'; if($i == $_pages) echo ' last'; ?>"><span><?php echo $i; ?></span></li>
+				<?php else: ?>
+					<li><a href="<?php echo $this->getToolbarUrl((int) $i); ?>"><?php echo $i; ?></a></li>
+				<?php endif; ?>
+			<?php endfor; ?>
+			
+			<?php // Next // ?>
+			<?php if($_page_number != $_pages): ?>
+				<li class="last">
+                    <a title="Next" href="<?php echo $this->getToolbarUrl('next'); ?>" class="next i-next">
+                        <img class="v-middle" alt="Next" src="<?php echo $this->getSkinUrl('images/pager_arrow_right.gif'); ?>" />
+                    </a>
+				</li>
+			<?php endif; ?>
+		</ol>
+	<?php endif; ?>
+</div>

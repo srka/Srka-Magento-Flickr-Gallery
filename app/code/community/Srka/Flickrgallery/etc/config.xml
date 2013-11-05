@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Srka_Flickrgallery>
+            <version>1.0.0</version>
+        </Srka_Flickrgallery>
+    </modules>
+
+    <global>
+        <blocks>
+            <flickrgallery>
+                <class>Srka_Flickrgallery_Block</class>
+            </flickrgallery>
+        </blocks>
+
+        <helpers>
+            <flickrgallery>
+                <class>Srka_Flickrgallery_Helper</class>
+            </flickrgallery>
+        </helpers>
+
+        <models>
+            <flickrgallery>
+                <class>Srka_Flickrgallery_Model</class>
+                <resourceModel>flickrgallery_mysql4</resourceModel>
+            </flickrgallery>
+            <flickrgallery_mysql4>
+                <class>Srka_Flickrgallery_Model_Mysql4</class>
+                <entities>
+                    <flickrgallery>
+                        <table>flickrgallery</table>
+                    </flickrgallery>
+                </entities>
+            </flickrgallery_mysql4>
+        </models>
+        <resources>
+            <flickrgallery_setup>
+                <setup>
+                    <module>Srka_Flickrgallery</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </flickrgallery_setup>
+            <flickrgallery_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </flickrgallery_write>
+            <flickrgallery_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </flickrgallery_read>
+        </resources>
+
+        <rewrite>
+            <photosets>
+                <from><![CDATA[#^/gallery/sets/#]]></from>
+                <to><![CDATA[/gallery/index/sets/]]></to>
+            </photosets>
+            <photoset>
+                <from><![CDATA[#^/gallery/set/#]]></from>
+                <to><![CDATA[/gallery/index/set/]]></to>
+            </photoset>
+        </rewrite>
+        <events>
+            <controller_action_layout_load_before>
+                <observers>
+                    <sets>
+                        <class>Srka_Flickrgallery_Model_Observer</class>
+                        <method>addHandles</method>
+                    </sets>
+                </observers>
+            </controller_action_layout_load_before>
+        </events>
+    </global>
+
+    <frontend>
+        <routers>
+            <flickrgallery>
+                <use>standard</use>
+                <args>
+                    <module>Srka_Flickrgallery</module>
+                    <frontName>gallery</frontName>
+                </args>
+            </flickrgallery>
+        </routers>
+
+        <layout>
+            <updates>
+                <flickrgallery>
+                    <file>flickrgallery.xml</file>
+                </flickrgallery>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <Srka_Flickrgallery>
+                    <files>
+                        <default>Srka_Flickrgallery.csv</default>
+                    </files>
+                </Srka_Flickrgallery>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <flickrgalleryconfig>
+                                            <title>Store Flickr Gallery Module Section</title>
+                                        </flickrgalleryconfig>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <default>
+        <flickrgalleryconfig>
+            <photosets>
+                <photosets_per_page>8</photosets_per_page>
+                <thumbsize>q</thumbsize>
+            </photosets>
+
+            <photoset>
+                <photos_per_page>10</photos_per_page>
+                <thumbsize>s</thumbsize>
+                <tooltip>1</tooltip>
+                <tooltip_style>black</tooltip_style>
+            </photoset>
+
+            <lightbox>
+                <use_lightbox>1</use_lightbox>
+                <image_target>1</image_target>
+                <include_lightbox>1</include_lightbox>
+            </lightbox>
+
+            <carousel>
+                <duration>0.5</duration>
+                <auto>0</auto>
+                <frequency>5</frequency>
+                <visibleslides>7</visibleslides>
+                <circular>0</circular>
+                <wheel>1</wheel>
+                <transition>sinoidal</transition>
+                <tooltip>1</tooltip>
+                <tooltip_style>black</tooltip_style>
+            </carousel>
+
+            <cache>
+                <timeout>24</timeout>
+            </cache>
+        </flickrgalleryconfig>
+    </default>
+</config>

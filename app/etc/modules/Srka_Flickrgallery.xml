@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Srka_Flickrgallery>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Srka_Flickrgallery>
+    </modules>
+</config>
