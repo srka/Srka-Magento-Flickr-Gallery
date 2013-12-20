@@ -42,9 +42,9 @@
         <?php $tmp_count++; ?>
         <div id="photo_thumb_<?php echo $this->getPhotoId($_photo) ?>" class="photo_thumb<?php if($_hasTooltip) echo ' opentip' ?>" title="<?php echo $this->getPhotoTitle($_photo) ?>">
     		<?php if($this->showOriginal()): ?>
-            <a title="<?php echo $this->getPhotoTitle($_photo) ?>" rel="<?php echo $this->getPhotoRel() ?>" href="<?php echo $this->getOriginalSizeUrl($_photo) ?>" <?php echo $this->getPhotoTarget() ?> class="<?php echo $this->getPhotoClass() ?>">
+            <a title="<?php echo $this->getPhotoTitle($_photo) ?><br /><?php echo $this->getPhotoDescription($_photo) ?>" rel="<?php echo $this->getPhotoRel() ?>" href="<?php echo $this->getOriginalSizeUrl($_photo) ?>" <?php echo $this->getPhotoTarget() ?> class="<?php echo $this->getPhotoClass() ?>">
             <?php else: ?>
-            <a title="<?php echo $this->getPhotoTitle($_photo) ?>" rel="<?php echo $this->getPhotoRel() ?>" href="<?php echo $this->getFullSizeUrl($_photo) ?>" <?php echo $this->getPhotoTarget() ?> class="<?php echo $this->getPhotoClass() ?>">
+            <a title="<?php echo $this->getPhotoTitle($_photo) ?><br /><?php echo $this->getPhotoDescription($_photo) ?>" rel="<?php echo $this->getPhotoRel() ?>" href="<?php echo $this->getFullSizeUrl($_photo) ?>" <?php echo $this->getPhotoTarget() ?> class="<?php echo $this->getPhotoClass() ?>">
             <?php endif; ?>
                 <div class="img_wrapper">
                     <img <?php if($_hasTooltip): ?>title=" "<?php else: ?>title="<?php echo $this->getPhotoTitle($_photo) ?>"<?php endif; ?> alt="<?php echo $this->getPhotoTitle($_photo) ?>" src="<?php echo $this->getThumbSizeUrl($_photo) ?>" />

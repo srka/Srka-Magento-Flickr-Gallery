@@ -215,14 +215,14 @@ class Srka_Flickrgallery_Block_Photoset extends Srka_Flickrgallery_Block_View {
         $hasCache = $cacheCollection->hasResponseType('getPhotoSet-' . $setid);
 
         if(empty($cacheData) || $hasCache === false){
-            $raw_photoset = file_get_contents("http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=$apikey&photoset_id=$setid&format=rest");
+            $raw_photoset = file_get_contents("http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=$apikey&photoset_id=$setid&format=rest&extras=description");
             $cacheModel->setResponseType('getPhotoSet-' . $setid)
                 ->setContent($raw_photoset)
                 ->setCreatedTime(date('Y-m-d H:i:s'))
                 ->save();
             //Mage::log('Cache not used for getPhotoSet with ID = ' . $setid, NULL, 'flickrdb.log');
         }elseif($hasCache !== false && $cacheCollection->cacheExpired('getPhotoSet-' . $setid)){
-            $raw_photoset = file_get_contents("http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=$apikey&photoset_id=$setid&format=rest");
+            $raw_photoset = file_get_contents("http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=$apikey&photoset_id=$setid&format=rest&extras=description");
             $cachedItem = $cacheModel->load($hasCache);
             $cachedItem->setResponseType('getPhotoSet-' . $setid)
                 ->setContent($raw_photoset)
@@ -242,8 +242,8 @@ class Srka_Flickrgallery_Block_Photoset extends Srka_Flickrgallery_Block_View {
                 $_item_count++;
                 if( (($_item_count > ($page - 1) * $per_page) && ($_item_count <= ($page * $per_page))) || $per_page == 0 ){
                     $max_size = $this->getMaxSizePhoto($photo['id']);
-                    $photos[] = array('id' => $photo['id'], 'title' => $photo['title'], 'server' => $photo['server'], 'farm' => $photo['farm'], 'secret' => $photo['secret'], 'maxsize' => $max_size);
-                }
+                    $photos[] = array('id' => $photo['id'], 'title' => $photo['title'], 'server' => $photo['server'], 'farm' => $photo['farm'], 'secret' => $photo['secret'], 'maxsize' => $max_size, 'description' => $photo->description);
+				}
             }
 
             $_result['photoset'] = $this->getPhotoSetFromID($setid);
@@ -279,6 +279,10 @@ class Srka_Flickrgallery_Block_Photoset extends Srka_Flickrgallery_Block_View {
     public function getPhotoTitle($photo){
         return $photo['title'];
     }
+
+	public function getPhotoDescription($photo){
+		return $photo['description'];
+	}
 
     public function getOriginalSizeUrl($photo){
         return $photo['maxsize'];
