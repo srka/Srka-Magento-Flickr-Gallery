@@ -19,7 +19,11 @@ Features
   * Extension does not use jQuery
   * <strong>NEW!</strong> Add individual photosets on any page with layout updates (most requested feature)
 
-  
+Change log
+----------
+<strong>1.1.0</strong>
+  * Support for Flickr API secure URLs (https). For more details visit  http://code.flickr.net/2014/04/30/flickr-api-going-ssl-only-on-june-27th-2014/
+
 How to install?
 ---------------
 Download Srka Flickr Gallery extension files to your Magento root directory. Extension files will be extracted into the base package / default template so if you have your own package just copy the extension files to your package / template directories.
