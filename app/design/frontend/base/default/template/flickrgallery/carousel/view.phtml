@@ -33,7 +33,7 @@
 					<div id="flickrgallery-carousel-content">
 						<?php foreach($_photosets as $_photoset): ?>
 							<a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>gallery/set/id/<?php echo $_photoset['id'] ?>" class="<?php if($_hasTooltip) echo 'opentip' ?>" title="<?php echo $_photoset['title'] ?>" id="<?php echo 'set-' . $_photoset['id'] ?>">
-								<img src="http://farm<?php echo $_photoset['farm'] ?>.static.flickr.com/<?php echo $_photoset['server'] ?>/<?php echo $_photoset['cover'] ?>_<?php echo $_photoset['secret'] ?>_s.jpg" alt="<?php echo $_photosets['title'] ?>" />
+								<img src="https://farm<?php echo $_photoset['farm'] ?>.static.flickr.com/<?php echo $_photoset['server'] ?>/<?php echo $_photoset['cover'] ?>_<?php echo $_photoset['secret'] ?>_s.jpg" alt="<?php echo $_photosets['title'] ?>" />
 							</a>
 						<?php endforeach; ?>
 					</div>	

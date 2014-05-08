@@ -35,7 +35,7 @@
 							<show_in_store>1</show_in_store>
 							<comment>
 								<![CDATA[You can get your Flickr API key form 
-								<a href="http://www.flickr.com/services/api/misc.api_keys.html" target="_blank">this</a> 
+								<a href="https://www.flickr.com/services/api/misc.api_keys.html" target="_blank">this</a>
 								page]]>
 							</comment>
 						</apikey>
@@ -94,7 +94,7 @@
 							<show_in_store>1</show_in_store>
 							<comment>
 								<![CDATA[Flickr thumbnail letter suffixes for the desired size.<br /> You can learn more about letter suffixes 
-								<a href="http://www.flickr.com/services/api/misc.urls.html" target="_blank">here</a>.<br />
+								<a href="https://www.flickr.com/services/api/misc.urls.html" target="_blank">here</a>.<br />
 								If left empty suffix "q" will be used.]]>
 							</comment>
 						</thumbsize>
@@ -128,7 +128,7 @@
 							<show_in_store>1</show_in_store>
 							<comment>
 								<![CDATA[Flickr thumbnail letter suffixes for the desired size.<br /> You can learn more about letter suffixes 
-								<a href="http://www.flickr.com/services/api/misc.urls.html" target="_blank">here</a>.<br />
+								<a href="https://www.flickr.com/services/api/misc.urls.html" target="_blank">here</a>.<br />
 								If left empty suffix "s" will be used.]]>
 							</comment>
 						</thumbsize>
@@ -142,7 +142,7 @@
 							<show_in_store>1</show_in_store>
 							<comment>
 								<![CDATA[Flickr letter suffixes for the desired size.<br /> You can learn more about letter suffixes 
-								<a href="http://www.flickr.com/services/api/misc.urls.html" target="_blank">here</a>.<br />
+								<a href="https://www.flickr.com/services/api/misc.urls.html" target="_blank">here</a>.<br />
 								If left empty biggest available size will be used.
 								]]>
 							</comment>

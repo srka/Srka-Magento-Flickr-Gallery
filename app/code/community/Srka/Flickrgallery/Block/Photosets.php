@@ -44,13 +44,13 @@ class Srka_Flickrgallery_Block_Photosets extends Srka_Flickrgallery_Block_View {
         $hasCache = $cacheCollection->hasResponseType('getPhotoSets');
 
         if(empty($cacheData) || $hasCache === false){
-            $raw_photosets = file_get_contents("http://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=$apikey&user_id=$userid&format=rest");
+            $raw_photosets = file_get_contents("https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=$apikey&user_id=$userid&format=rest");
             $cacheModel->setResponseType('getPhotoSets')
                 ->setContent($raw_photosets)
                 ->setCreatedTime(date('Y-m-d H:i:s'))
                 ->save();
         }elseif($hasCache !== false && $cacheCollection->cacheExpired('getPhotoSets')){
-            $raw_photosets = file_get_contents("http://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=$apikey&user_id=$userid&format=rest");
+            $raw_photosets = file_get_contents("https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=$apikey&user_id=$userid&format=rest");
             $cachedItem = $cacheModel->load($hasCache);
             $cachedItem->setResponseType('getPhotoSets')
                 ->setContent($raw_photosets)
@@ -106,7 +106,7 @@ class Srka_Flickrgallery_Block_Photosets extends Srka_Flickrgallery_Block_View {
     }
 
     public function getPhotosetImageUrl($photoset){
-        return sprintf('http://farm%s.static.flickr.com/%s/%s_%s_%s.jpg', $photoset['farm'], $photoset['server'], $photoset['cover'], $photoset['secret'], $this->_thumb_size_prefix);
+        return sprintf('https://farm%s.static.flickr.com/%s/%s_%s_%s.jpg', $photoset['farm'], $photoset['server'], $photoset['cover'], $photoset['secret'], $this->_thumb_size_prefix);
     }
 
     public function getToolbarData(){

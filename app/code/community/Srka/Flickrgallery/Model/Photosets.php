@@ -4,7 +4,7 @@ class Srka_Flickrgallery_Model_Photosets extends Mage_Eav_Model_Entity_Attribute
 
     public function toOptionArray(){
 		if (! isset($this->_options)){
-			$raw_xml = file_get_contents('http://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=' . Mage::getStoreConfig('flickrgalleryconfig/general/apikey') . '&user_id=' . Mage::getStoreConfig('flickrgalleryconfig/general/user') . '&format=rest');
+			$raw_xml = file_get_contents('https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=' . Mage::getStoreConfig('flickrgalleryconfig/general/apikey') . '&user_id=' . Mage::getStoreConfig('flickrgalleryconfig/general/user') . '&format=rest');
 			$xml = new SimpleXMLElement($raw_xml);
 			$options = array();
 			if($xml['stat'] == 'ok'){
